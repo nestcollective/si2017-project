@@ -1,0 +1,59 @@
+box:
+  id:  mjgsilva/rails5
+  tag: latest
+
+services:
+  - id: postgres
+    env:
+      POSTGRES_PASSWORD: nest-si-2017
+      POSTGRES_USER: nest-si-2017  # optional
+
+build:
+  steps:
+
+    - script:
+      name: env
+      code: env
+
+    # Define environment variables
+    - script:
+      name: Define environment variables
+      code: |
+        export DATABASE_USER=$POSTGRES_ENV_POSTGRES_USER
+        export DATABASE_PASSWORD=$POSTGRES_ENV_POSTGRES_PASSWORD
+        export DATABASE_HOST=$POSTGRES_PORT_5432_TCP_ADDR
+        export DATABASE_PORT=$POSTGRES_PORT_5432_TCP_PORT
+
+    # Install system libraries
+    - script:
+      name: Install system libraries
+      code: |
+        sudo apt-get install libxml2-dev libxslt1-dev
+
+    # Configure bundler
+    - script:
+      name: Configure bundler
+      code: |
+        bundle config build.nokogiri --use-system-libraries
+
+    # Install Dependencies
+    - bundle-install
+
+    # Setup Database
+    - script:
+      name: Setup Database
+      code: |
+        RAILS_ENV=test bundle exec rake db:create
+        RAILS_ENV=test bundle exec rake db:schema:load
+
+    # Rubocop
+    - script:
+      name: Run Rubocop
+      code: |
+        bundle exec rubocop
+
+    # Test App
+    - script:
+      name: Test MainApp
+      code: |
+        bundle exec rspec
