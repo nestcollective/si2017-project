@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'simple_token_authentication', '~> 1.0'
+
 gem 'rack-cors'
 
 gem 'devise'

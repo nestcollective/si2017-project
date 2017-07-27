@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  skip_before_action :verify_signed_out_user
 
   respond_to :json
 
@@ -22,9 +23,12 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    resource = User.find_by(logout_params)
+    resource.authentication_token = nil
+    resource.save
+    render :json => {}.to_json, :status => :ok
+  end
 
   # protected
 
@@ -32,4 +36,9 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  private
+  def logout_params
+    params.require(:user).permit(:email, :authentication_token)
+  end
 end

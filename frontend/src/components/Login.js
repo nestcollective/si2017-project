@@ -16,6 +16,8 @@ export default class Login extends Component {
       if(err){
         this.setState({ error: err });
       }else{
+        sessionStorage.setItem("email", res.body.email);
+        sessionStorage.setItem("token", res.body.authentication_token);
         console.log("login with success");
       }
     });
