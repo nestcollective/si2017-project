@@ -1,0 +1,24 @@
+var request = require('superagent');
+
+export default function logout(email, authentication_token, callback) {
+  request
+    .delete('http://localhost:3000/users/sign_out.json')
+    .send({
+      user: {
+        email,
+        authentication_token,
+      }
+    })
+    .set('Accept', 'application/json')
+    .set('Content-Type', 'application/json')
+    .end(function(err, res){
+      if(err){
+        err = 'Não é possível contactar o servidor.';
+      }else{
+        if(res.statusCode !== 200){
+          err = 'Não é possível contactar o servidor.';
+        }
+      }
+      callback(err, res);
+    });
+} 
