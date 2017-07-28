@@ -76,6 +76,8 @@ export default class Signup extends Component {
       console.log(res);
       if(err){
         this.setState({ error: err });
+      }else if(res.body.error){
+        this.setState({ error: res.body.error });
       }else{
         //TODO
         console.log("signup with success");

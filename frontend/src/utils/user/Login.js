@@ -13,14 +13,10 @@ export default function login(email, password, callback) {
     .set('Content-Type', 'application/json')
     .end(function(err, res){
       if(err){
-        err = 'You have entered an invalid username or password';
+        err = 'Não é possível contactar o servidor.';
       }else{
-        if(res.statusCode === 200){
-          if (res.body.error){
-            err = 'You have entered an invalid username or password';
-          }
-        }else{
-          err = 'You have entered an invalid username or password';
+        if(res.statusCode !== 200){
+          err = 'Não é possível contactar o servidor.';
         }
       }
       callback(err, res);

@@ -17,7 +17,7 @@ class Users::SessionsController < Devise::SessionsController
     if resource.present?
       render json: resource
     else
-      render json: resource.errors
+      render json: { error: resource.errors.first[1] } #Send only first error message
     end
 
   end
@@ -25,9 +25,13 @@ class Users::SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     resource = User.find_by(logout_params)
-    resource.authentication_token = nil
-    resource.save
-    render :json => {}.to_json, :status => :ok
+    if resource
+      resource.authentication_token = nil
+      resource.save
+      render :json => {}.to_json, :status => :ok
+    else
+      render json: { error: 'Utilizador não encontrado' }
+    end
   end
 
   # protected

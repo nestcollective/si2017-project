@@ -25,7 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      render json: resource.errors
+      render json: { error: resource.errors.first[1] } #Send only first error message
     end
   end
 

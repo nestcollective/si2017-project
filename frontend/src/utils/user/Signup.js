@@ -15,15 +15,12 @@ export default function signup(firstName, lastName, email, password, newsletter,
     .set('Accept', 'application/json')
     .set('Content-Type', 'application/json')
     .end(function(err, res){
+      console.log(res);
       if(err){
-        err = 'Something went wrong';
+        err = 'Não é possível contactar o servidor.';
       }else{
-        if(res.statusCode === 200){
-          if (res.body.error){
-            err = 'Something went wrong';
-          }
-        }else{
-          err = 'Something went wrong';
+        if(res.statusCode !== 200){
+          err = 'Não é possível contactar o servidor.';
         }
       }
       callback(err, res);

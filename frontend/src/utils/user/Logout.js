@@ -13,14 +13,10 @@ export default function logout(email, authentication_token, callback) {
     .set('Content-Type', 'application/json')
     .end(function(err, res){
       if(err){
-        err = 'Something went wrong';
+        err = 'Não é possível contactar o servidor.';
       }else{
-        if(res.statusCode === 200){
-          if (res.body.error){
-            err = 'Something went wrong';
-          }
-      }else{
-          err = 'Something went wrong';
+        if(res.statusCode !== 200){
+          err = 'Não é possível contactar o servidor.';
         }
       }
       callback(err, res);

@@ -15,6 +15,8 @@ export default class Logout extends Component {
     logout(email, authenticationToken, (err, res) => {
       if(err){
         this.setState({ error: err });
+      }else if(res.body.error){
+        this.setState({ error: res.body.error });
       }else{
         sessionStorage.setItem('id', '');
         sessionStorage.setItem('first_name', '');

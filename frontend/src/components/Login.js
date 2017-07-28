@@ -17,6 +17,8 @@ export default class Login extends Component {
       login(this.state.email, this.state.password, (err, res) => {
         if(err){
           this.setState({ error: err });
+        }else if(res.body.error){
+          this.setState({ error: res.body.error });
         }else{
           sessionStorage.setItem('id', res.body.id);
           sessionStorage.setItem('first_name', res.body.first_name);
