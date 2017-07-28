@@ -3,42 +3,39 @@ import logout from '../utils/user/Logout.js';
 
 export default class Logout extends Component {
   state = {
-    email: sessionStorage.getItem("email"),
-    token: sessionStorage.getItem("token"),
     error: null,
   }
 
   submit = event => {
     this.setState({
-      email: sessionStorage.getItem("email"),
-      token: sessionStorage.getItem("token"),
       error: null,
     });
-    logout(this.state.email, this.state.token, (err, res) => {
-      console.log(res);
+    let email = sessionStorage.getItem('email');
+    let authenticationToken = sessionStorage.getItem('authentication_token');
+    logout(email, authenticationToken, (err, res) => {
       if(err){
         this.setState({ error: err });
       }else{
-        console.log("logout with success");
-        sessionStorage.setItem("email", "");
-        sessionStorage.setItem("token", "");
+        sessionStorage.setItem('id', '');
+        sessionStorage.setItem('first_name', '');
+        sessionStorage.setItem('last_name', '');
+        sessionStorage.setItem('email', '');
+        sessionStorage.setItem('authentication_token', '');
+        sessionStorage.setItem('avatar', '');
         this.setState({
-          email: sessionStorage.getItem("email"),
-          token: sessionStorage.getItem("token"),
           error: null,
         });
+        this.props.callback(); 
       }
     });
   }
+
   render() {
-    if(this.state.email){
-      return (
-        <div>
-          <button onClick={this.submit}> Sair </button>
-          {this.state.error}
-        </div>
-      );
-    }
-    return null;
-  }  
+    return (
+      <div>
+        <button onClick={this.submit}>Sair</button>
+        {this.state.error}
+      </div>
+    );
+  }
 }

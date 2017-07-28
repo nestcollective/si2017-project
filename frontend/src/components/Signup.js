@@ -13,7 +13,7 @@ export default class Signup extends Component {
     passwordError: null,
     confirmPassword: '',
     confirmPasswordError: null,
-    newsletter: true,
+    newsletter: false,
     error: null,
   };
 
@@ -22,71 +22,62 @@ export default class Signup extends Component {
   changeFirstName = event => {
     this.setState({ firstName: event.target.value, error: null, firstNameError: null });
     if(event.target.value.length < 2){
-      this.setState({firstNameError: "O Nome deve ter duas ou mais letras."});
+      this.setState({firstNameError: 'O Nome deve ter duas ou mais letras.'});
     }
   }
   changeLastName = event => {
     this.setState({ lastName: event.target.value, error: null, lastNameError: null });
     if(event.target.value.length < 2){
-      this.setState({lastNameError: "O Apelido deve ter duas ou mais letras."});
+      this.setState({lastNameError: 'O Apelido deve ter duas ou mais letras.'});
     }
   }
   changeEmail = event => {
     this.setState({ email: event.target.value, error: null, emailError: null });
     if(!this.emailRegex.test(event.target.value)){
-      this.setState({emailError: "Email inválido."});
+      this.setState({emailError: 'Email inválido.'});
     }
   }
   changePassword = event => {
     this.setState({ password: event.target.value, error: null, passwordError: null });
     if(event.target.value.length < 6){
-      this.setState({passwordError: "A password deve ter seis ou mais caracteres."});
+      this.setState({passwordError: 'A password deve ter seis ou mais caracteres.'});
     }
   }
   changeConfirmPassword = event => {
     this.setState({ confirmPassword: event.target.value, error: null, confirmPasswordError: null });
     if(event.target.value !== this.state.password){
-      this.setState({confirmPasswordError: "As passwords não coincidem."});
+      this.setState({confirmPasswordError: 'As passwords não coincidem.'});
     }
   }
   changeNewsletter = event => this.setState((prevState, props) => ({newsletter: !prevState.newsletter, error: null})); 
 
   submit = event => {
     if(this.state.firstName.length < 2){
-      console.log("First Name too short");
+      this.setState({firstNameError: 'O Nome deve ter duas ou mais letras.'});
       return;
     }
     if(this.state.lastName.length < 2){
-      console.log("Last Name too short");
-      return;
-    }
-    if(this.state.lastName.length === 0){
-      console.log("Email cant be blank");
+      this.setState({lastNameError: 'O Apelido deve ter duas ou mais letras.'});
       return;
     }
     if(!this.emailRegex.test(this.state.email)){
-      console.log("Invalid Email");
+      this.setState({emailError: 'Email inválido.'});
       return;
     }
     if(this.state.password.length === 0){
-      console.log("Password cant be blank");
+      this.setState({passwordError: 'A password deve ter seis ou mais caracteres.'});
       return;
     }
-    if(this.state.confirmPassword.length === 0){
-      console.log("Confirm Password cant be blank");
+    if(this.state.confirmPassword.length === 0 || this.state.password !== this.state.confirmPassword){
+      this.setState({confirmPasswordError: 'As passwords não coincidem.'});
       return;
     }
-    if(this.state.password !== this.state.confirmPassword){
-      console.log("Passwords dont match");
-      return;
-    }
-    //request
-    console.log(this.state); 
     signup(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.newsletter, (err, res) => {
       console.log(res);
       if(err){
         this.setState({ error: err });
       }else{
+        //TODO
         console.log("signup with success");
       }
     });
