@@ -18,7 +18,7 @@ export default class Signup extends Component {
   };
 
   emailRegex = /^\S+@\S+\.\S+$/;
-  
+
   changeFirstName = event => {
     this.setState({ firstName: event.target.value, error: null, firstNameError: null });
     if(event.target.value.length < 2){
@@ -49,7 +49,7 @@ export default class Signup extends Component {
       this.setState({confirmPasswordError: 'As passwords não coincidem.'});
     }
   }
-  changeNewsletter = event => this.setState((prevState, props) => ({newsletter: !prevState.newsletter, error: null})); 
+  changeNewsletter = event => this.setState((prevState, props) => ({newsletter: !prevState.newsletter, error: null}));
 
   submit = event => {
     if(this.state.firstName.length < 2){
@@ -91,30 +91,30 @@ export default class Signup extends Component {
         <label>
           Nome:
           {this.state.firstNameError}
-          <input 
-            onChange={this.changeFirstName} 
+          <input
+            onChange={this.changeFirstName}
             value={this.state.firstName} />
         </label>
         <label>
           Apelido:
           {this.state.lastNameError}
-          <input 
+          <input
             onChange={this.changeLastName}
             value={this.state.lastName} />
         </label>
         <label>
           Email:
           {this.state.emailError}
-          <input 
+          <input
             onChange={this.changeEmail}
             value={this.state.email} />
         </label>
         <label>
           Password:
           {this.state.passwordError}
-          <input 
-            type='password' 
-            onChange={this.changePassword} 
+          <input
+            type='password'
+            onChange={this.changePassword}
             value={this.state.password} />
         </label>
         <label>
@@ -126,7 +126,7 @@ export default class Signup extends Component {
             value={this.state.confirmPassword} />
         </label>
         <label>
-          <input 
+          <input
             type="checkbox"
             checked={this.state.newsletter}
             onChange={this.changeNewsletter} />
