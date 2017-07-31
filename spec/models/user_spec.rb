@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:valid_user) { build :user }
-  let(:empty_first_name) { build :user, :empty_first_name  }
-  let(:empty_last_name) { build :user, :empty_last_name  }
-  let(:empty_email) { build :user, :empty_email  }
-  let(:empty_password) { build :user, :empty_password  }
-  let(:invalid_email) { build :user, :invalid_email  }
-  let(:short_password) { build :user, :invalid_password  }
-  let(:duplicate_email) { build :user, email: 'email@email.com'  }
+  let(:empty_first_name) { build :user, :empty_first_name }
+  let(:empty_last_name) { build :user, :empty_last_name }
+  let(:empty_email) { build :user, :empty_email }
+  let(:empty_password) { build :user, :empty_password }
+  let(:invalid_email) { build :user, :invalid_email }
+  let(:short_password) { build :user, :invalid_password }
+  let(:duplicate_email) { build :user, email: 'email@email.com' }
 
   describe 'Valid User' do
     it 'should be able to create a valid user' do
@@ -46,5 +46,4 @@ RSpec.describe User, type: :model do
       expect(duplicate_email).not_to be_valid
     end
   end
-
 end

@@ -16,12 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.save
     yield resource if block_given?
     if resource.persisted?
-      if resource.active_for_authentication?
-        sign_up(resource_name, resource)
-        render json: resource
-      else
-        render json: resource
-      end
+      render json: resource
     else
       clean_up_passwords resource
       set_minimum_password_length

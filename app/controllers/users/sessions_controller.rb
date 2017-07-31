@@ -12,27 +12,26 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    user = User.find_by_email(params[:user][:email])
+    user = User.find_by(email: params[:user][:email])
 
     if user.present? && user.valid_password?(params[:user][:password])
       render json: user
     else
       render json: { error: 'Credentials not matching' }
     end
-
   end
 
   # DELETE /resource/sign_out=end
-  #def destroy
-    #resource = User.find_by(logout_params)
-    #if resource
-      #resource.authentication_token = nil
-      #resource.save
-      #render :json => {}.to_json, :status => :ok
-    #else
-      #render json: { error: resource.errors.full_messages.join(' ') }
-    #end
-  #end
+  # def destroy
+  #   resource = User.find_by(logout_params)
+  #   if resource
+  #     resource.authentication_token = nil
+  #     resource.save
+  #     render :json => {}.to_json, :status => :ok
+  #   else
+  #     render json: { error: resource.errors.full_messages.join(' ') }
+  #   end
+  # end
 
   # protected
 
@@ -41,8 +40,9 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
-  private
-  def logout_params
-    params.require(:user).permit(:email, :authentication_token)
-  end
+  # private
+
+  # def logout_params
+  #   params.require(:user).permit(:email, :authentication_token)
+  # end
 end

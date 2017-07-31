@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
-    first_name {Faker::Name.first_name }
-    last_name {Faker::Name.last_name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
   end
@@ -23,7 +23,7 @@ FactoryGirl.define do
   end
 
   trait :empty_password do
-    password nil 
+    password nil
   end
 
   trait :invalid_password do
