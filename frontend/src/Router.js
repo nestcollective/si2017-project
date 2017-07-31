@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router';
 import { connect } from 'react-redux';
 
 import Login from './containers/Login';
-import SignupScreen from './components/SignupScreen';
+import Signup from './containers/Signup';
 import Home from './containers/Home';
 
 const Router = ({ history, user }) => {
@@ -25,7 +25,7 @@ const Router = ({ history, user }) => {
         />
         <Route initial exact path='/signup' render={() => isLoggedIn
             ? <Redirect to="/"/>
-            : <SignupScreen />
+            : <Signup />
           }
         />
       </div>

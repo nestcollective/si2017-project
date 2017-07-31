@@ -22,17 +22,17 @@ class Users::SessionsController < Devise::SessionsController
 
   end
 
-  # DELETE /resource/sign_out
-  def destroy
-    resource = User.find_by(logout_params)
-    if resource
-      resource.authentication_token = nil
-      resource.save
-      render :json => {}.to_json, :status => :ok
-    else
-      render json: { error: resource.errors.full_messages.join(' ') }
-    end
-  end
+  # DELETE /resource/sign_out=end
+  #def destroy
+    #resource = User.find_by(logout_params)
+    #if resource
+      #resource.authentication_token = nil
+      #resource.save
+      #render :json => {}.to_json, :status => :ok
+    #else
+      #render json: { error: resource.errors.full_messages.join(' ') }
+    #end
+  #end
 
   # protected
 
