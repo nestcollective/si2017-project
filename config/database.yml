@@ -2,11 +2,11 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username:   <%= ENV["SI_PROJECT_DATABASE_USER"] %>
-  password:   <%= ENV['SI_PROJECT_DATABASE_PASSWORD'] %>
-  host:       <%= ENV['SI_PROJECT_DATABASE_HOST'] %>
-  port:       <%= ENV['SI_PROJECT_DATABASE_PORT'] || "5432" %>
-  url:        <%= ENV['SI_PROJECT_DATABASE_URL'] %>
+  username:   <%= ENV['DATABASE_USER'] %>
+  password:   <%= ENV['DATABASE_PASSWORD'] %>
+  host:       <%= ENV['DATABASE_HOST'] %>
+  port:       <%= ENV['DATABASE_PORT'] || "5432" %>
+  url:        <%= ENV['DATABASE_URL'] %>
 
 
 development:
