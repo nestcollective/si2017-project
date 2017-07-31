@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <div className="App">
         {(() => {
-          if(this.state.authenticationToken === '' && this.state.email === ''){
+          if(this.state.authenticationToken === '' || this.state.email === '' || this.state.authenticationToken === null || this.state.email === null){
             return(
               <div>
                 <Login callback={this.login} />
