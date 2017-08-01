@@ -36,8 +36,30 @@ build:
       code: |
         bundle config build.nokogiri --use-system-libraries
 
+    # Install nvm/npm
+    - script:
+      name: Install nvm
+      code: |
+        git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`
+        . ~/.nvm/nvm.sh
+
+    # Install node
+    - script:
+      name: Install node
+      code: |
+        nvm install node
+        nvm alias default node
+
     # Install Dependencies
     - bundle-install
+
+    # Install node Dependencies
+    - script:
+      name: Install node dependencies
+      code: |
+        cd frontend
+        npm install
+        cd ..
 
     # Setup Database
     - script:
@@ -57,3 +79,9 @@ build:
       name: Test MainApp
       code: |
         bundle exec rspec
+
+    # ESLint
+    - script:
+      name: Run ESLint
+      code: |
+        cd frontend && npm run lint

@@ -14,39 +14,27 @@ class Signup extends Component {
     newsletter: false,
   };
 
-  changeFirstName = event => {
-    this.setState({ firstName: event.target.value });
+  changeStateKey = (key, value) => {
+    this.setState({ [key]: value });
     this.props.setError(null);
   }
-  changeLastName = event => {
-    this.setState({ lastName: event.target.value });
-    this.props.setError(null);
-  }
-  changeEmail = event => {
-    this.setState({ email: event.target.value });
-    this.props.setError(null);
-  }
-  changePassword = event => {
-    this.setState({ password: event.target.value });
-    this.props.setError(null);
-  }
-  changeConfirmPassword = event => {
-    this.setState({ confirmPassword: event.target.value });
-    this.props.setError(null);
-  }
+
   changeNewsletter = event => this.setState((prevState, props) => ({ newsletter: !prevState.newsletter }));
 
   signup = () => {
-    if(this.state.password !== this.state.confirmPassword){
-        this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' });
-        return;
+    const { password, confirmPassword, firstName, lastName, email, newsletter } = this.state;
+
+    if (password !== confirmPassword){
+      this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' });
+      return;
     }
-    this.props.signup(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.newsletter);
+
+    this.props.signup(firstName, lastName, email, password, newsletter);
   }
 
   render() {
     const { firstName, lastName, email, password, confirmPassword, newsletter } = this.state;
-    const { changeFirstName, changeLastName, changeEmail, changePassword, changeConfirmPassword, changeNewsletter, signup } = this;
+    const { changeNewsletter, signup } = this;
     const { error } = this.props;
 
     return (
@@ -58,11 +46,7 @@ class Signup extends Component {
         confirmPassword={confirmPassword}
         newsletter={newsletter}
         error={error}
-        changeFirstName={changeFirstName}
-        changeLastName={changeLastName}
-        changeEmail={changeEmail}
-        changePassword={changePassword}
-        changeConfirmPassword={changeConfirmPassword}
+        changeStateKey={this.changeStateKey}
         changeNewsletter={changeNewsletter}
         submit={signup}
       />

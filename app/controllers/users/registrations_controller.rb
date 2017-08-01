@@ -75,4 +75,3 @@ class Users::RegistrationsController < Devise::RegistrationsController
     params.require(:user).permit(:first_name, :last_name, :email, :password, :notify_newsletter)
   end
 end
-

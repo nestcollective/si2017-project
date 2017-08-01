@@ -47,4 +47,3 @@ class Users::SessionsController < Devise::SessionsController
   #   params.require(:user).permit(:email, :authentication_token)
   # end
 end
-
