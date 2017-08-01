@@ -1,4 +1,5 @@
 pt:
+  login_error: Credenciais inválidas.
   activerecord:
     errors:
       models:
@@ -7,6 +8,14 @@ pt:
             email:
               taken: Email já está a ser utilizado.
               invalid: Email inválido.
+              blank: Email não pode estar vazio.
+            first_name:
+              blank: Nome não pode estar vazio.
+            last_name:
+              blank: Apelido não pode estar vazio.
+            password:
+              blank: Palavra-passe deve conter pelo menos 6 caracteres.
+              too_short: Palavra-passe deve conter pelo menos 6 caracteres.
     attributes:
       user:
         confirmation_sent_at: 

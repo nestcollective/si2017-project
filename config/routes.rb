@@ -7,3 +7,4 @@
     registrations: 'users/registrations'
   }
 end
+

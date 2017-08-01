@@ -38,7 +38,7 @@ class Signup extends Component {
 
   signup = () => {
     if(this.state.password !== this.state.confirmPassword){
-        this.props.setError({ confirm_password: 'Passwords do not match.' });
+        this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' });
         return;
     }
     this.props.signup(this.state.firstName, this.state.lastName, this.state.email, this.state.password, this.state.newsletter);

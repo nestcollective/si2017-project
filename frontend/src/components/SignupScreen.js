@@ -1,50 +1,46 @@
 import React from 'react';
+import TextInput from './TextInput'
 
 const SignupScreen = ({ changeFirstName, firstName, changeLastName, lastName, changeEmail, email, changePassword, password, changeConfirmPassword, confirmPassword, changeNewsletter, newsletter, submit, error }) => (
   <div>
-    <label>
-      Nome:
-      {error && error.first_name}
-      <input
-        onChange={changeFirstName}
-        value={firstName} />
-    </label>
-    <label>
-      Apelido:
-      {error && error.last_name}
-      <input
-        onChange={changeLastName}
-        value={lastName} />
-    </label>
-    <label>
-      Email:
-      {error && error.email}
-      <input
-        onChange={changeEmail}
-        value={email} />
-    </label>
-    <label>
-      Password:
-      {error && error.password}
-      <input
-        type='password'
-        onChange={changePassword}
-        value={password} />
-    </label>
-    <label>
-      Confirmar Password:
-      {error && error.confirm_password}
-      <input
-        type='password'
-        onChange={changeConfirmPassword}
-        value={confirmPassword} />
-    </label>
+    <TextInput
+      text='Nome'
+      error={error && error.first_name}
+      changeHandler={changeFirstName}
+      value={firstName} 
+    />
+    <TextInput
+      text='Apelido'
+      error={error && error.last_name}
+      changeHandler={changeLastName}
+      value={lastName} 
+    />
+    <TextInput
+      text='Email'
+      error={error && error.email}
+      changeHandler={changeEmail}
+      value={email} 
+    />
+    <TextInput
+      text='Palavra-passe'
+      type={'password'} 
+      error={error && error.password}
+      changeHandler={changePassword}
+      value={password} 
+    />
+    <TextInput
+      text='Confirmar palavra-passe'
+      type={'password'} 
+      error={error && error.confirm_password}
+      changeHandler={changeConfirmPassword}
+      value={confirmPassword} 
+    />
     <label>
       <input
         type="checkbox"
         checked={newsletter}
         onChange={changeNewsletter} />
-        Subscreva a nossa newsletter.
+      Subscreva a nossa newsletter.
     </label>
 
     <button onClick={submit}>Registar</button>

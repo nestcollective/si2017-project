@@ -9,7 +9,7 @@ const LoginScreen = ({ changeEmail, email, changePassword, password, submit, err
         value={email} />
     </label>
     <label>
-      Password:
+      Palavra-passe:
       <input
         type='password'
         onChange={changePassword}

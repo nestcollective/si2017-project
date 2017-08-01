@@ -17,7 +17,8 @@ class Users::SessionsController < Devise::SessionsController
     if user.present? && user.valid_password?(params[:user][:password])
       render json: user
     else
-      render json: { error: 'Credentials not matching' }
+      error = I18n.t 'login_error'
+      render json: { error: error }
     end
   end
 
@@ -46,3 +47,4 @@ class Users::SessionsController < Devise::SessionsController
   #   params.require(:user).permit(:email, :authentication_token)
   # end
 end
+
