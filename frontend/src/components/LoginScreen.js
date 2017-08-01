@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LoginScreen = ({
-  changeEmail,
-  email,
-  changePassword,
-  password,
-  submit,
-  error,
-}) => (
+const LoginScreen = ({ changeEmail, email, changePassword, password, submit, error }) => (
   <div>
     <label>
       Email:
@@ -38,7 +31,7 @@ LoginScreen.propTypes = {
   changePassword: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   submit: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
 };
 
 export default LoginScreen;

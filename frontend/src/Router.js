@@ -54,7 +54,7 @@ Router.propTypes = {
     avatar: PropTypes.string,
     authentication_token: PropTypes.string,
   }),
-  history: PropTypes.isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
 export default connect(({ user }) => ({ user: user.user }))(Router);

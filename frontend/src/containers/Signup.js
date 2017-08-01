@@ -56,7 +56,13 @@ class Signup extends Component {
 }
 
 Signup.propTypes = {
-  error: PropTypes.string.isRequired,
+  error: PropTypes.shape({
+    first_name: PropTypes.array,
+    last_name: PropTypes.array,
+    email: PropTypes.array,
+    password: PropTypes.array,
+    confirmPassword: PropTypes.string,
+  }),
   setError: PropTypes.func.isRequired,
   signup: PropTypes.func.isRequired,
 };

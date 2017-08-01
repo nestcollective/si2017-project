@@ -4,7 +4,8 @@ import { compose, createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { persistStore, autoRehydrate } from 'redux-persist';
+// import { persistStore, autoRehydrate } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 import thunk from 'redux-thunk';
 import user from './reducers/user';
 import app from './reducers/app';
@@ -28,7 +29,7 @@ class App extends Component {
       undefined,
       compose(
         applyMiddleware(thunk, middleware),
-        autoRehydrate(),
+        // autoRehydrate(),
       ),
     );
     persistStore(this.store, {}, () => this.setState({ loading: false }));

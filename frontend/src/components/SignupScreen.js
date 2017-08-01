@@ -75,7 +75,13 @@ SignupScreen.propTypes = {
   changeNewsletter: PropTypes.func.isRequired,
   newsletter: PropTypes.bool.isRequired,
   submit: PropTypes.func.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.shape({
+    first_name: PropTypes.array,
+    last_name: PropTypes.array,
+    email: PropTypes.array,
+    password: PropTypes.array,
+    confirmPassword: PropTypes.string,
+  }),
 };
 
 export default SignupScreen;
