@@ -1,6 +1,6 @@
+import { push } from 'react-router-redux';
 import { LOGIN, LOGOUT } from './types';
 import { requestPost } from '../utils/api-handler';
-import { push } from 'react-router-redux';
 import { error } from './app';
 
 function loginSuccess(user) {
@@ -23,17 +23,15 @@ export function login(email, password) {
       user: {
         email,
         password,
-      }
+      },
     }).then((response) => {
       if (response.body.error != null) {
-        dispatch(error(response.body.error))
-      }
-      else {
+        dispatch(error(response.body.error));
+      } else {
         dispatch(loginSuccess(response.body));
         dispatch(push('/'));
       }
-    })
-    .catch((err) => dispatch(error(err.message)));
+    }).catch(err => dispatch(error(err.message)));
   };
 }
 
@@ -46,15 +44,13 @@ export function signup(firstName, lastName, email, password, newsletter) {
         email,
         password,
         newsletter,
-      }
+      },
     }).then((response) => {
       if (response.body.error != null) {
-        dispatch(error(response.body.error))
-      }
-      else {
+        dispatch(error(response.body.error));
+      } else {
         dispatch(push('/login'));
       }
-    })
-    .catch((err) => dispatch(error(err.message)));
+    }).catch(err => dispatch(error(err.message)));
   };
 }

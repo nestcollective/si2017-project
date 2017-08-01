@@ -5,9 +5,8 @@ const initialState = {
 };
 
 export default function (state = initialState, action) {
-
   if (action.type === LOGIN) {
-    return { user: { ...action.payload } };
+    return { user: { ...action.payload } };
   } else if (action.type === LOGOUT) {
     return initialState;
   }

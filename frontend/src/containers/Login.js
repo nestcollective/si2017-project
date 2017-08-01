@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import LoginScreen from '../components/LoginScreen';
 import { login } from '../actions/user';
 import { error } from '../actions/app';
-import { connect } from 'react-redux';
 
 class Login extends Component {
   state = {
@@ -10,12 +11,12 @@ class Login extends Component {
     password: '',
   };
 
-  changeEmail = event => {
+  changeEmail = (event) => {
     this.setState({ email: event.target.value });
     this.props.setError(null);
   };
 
-  changePassword = event => {
+  changePassword = (event) => {
     this.setState({ password: event.target.value });
     this.props.setError(null);
   };
@@ -39,5 +40,11 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  error: PropTypes.string.isRequired,
+  setError: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+};
 
 export default connect(({ app }) => ({ error: app.error }), { login, setError: error })(Login);

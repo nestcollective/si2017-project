@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import SignupScreen from '../components/SignupScreen';
 import { signup } from '../actions/user';
 import { error } from '../actions/app';
-import { connect } from 'react-redux';
 
 class Signup extends Component {
   state = {
@@ -19,12 +20,12 @@ class Signup extends Component {
     this.props.setError(null);
   }
 
-  changeNewsletter = event => this.setState((prevState, props) => ({ newsletter: !prevState.newsletter }));
+  changeNewsletter = () => this.setState(prevState => ({ newsletter: !prevState.newsletter }));
 
   signup = () => {
     const { password, confirmPassword, firstName, lastName, email, newsletter } = this.state;
 
-    if (password !== confirmPassword){
+    if (password !== confirmPassword) {
       this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' });
       return;
     }
@@ -50,8 +51,14 @@ class Signup extends Component {
         changeNewsletter={changeNewsletter}
         submit={signup}
       />
-    )
+    );
   }
 }
 
-export default connect(({ app }) => ({ error: app.error }), { signup, setError: error})(Signup);
+Signup.propTypes = {
+  error: PropTypes.string.isRequired,
+  setError: PropTypes.func.isRequired,
+  signup: PropTypes.func.isRequired,
+};
+
+export default connect(({ app }) => ({ error: app.error }), { signup, setError: error })(Signup);
