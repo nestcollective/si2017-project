@@ -12,6 +12,7 @@ capybara-*.html
 /public/system
 /coverage/
 /spec/tmp
+/frontend/node_modules/
 *.orig
 rerun.txt
 pickle-email-*.html
