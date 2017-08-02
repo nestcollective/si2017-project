@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import { LOGIN, LOGOUT } from './types';
 import { requestPost } from '../utils/api-handler';
-import { error } from './app';
+import { setError } from './error';
 
 function loginSuccess(user) {
   return {
@@ -26,12 +26,12 @@ export function login(email, password) {
       },
     }).then((response) => {
       if (response.body.error != null) {
-        dispatch(error(response.body.error));
+        dispatch(setError(response.body.error, 'login'));
       } else {
         dispatch(loginSuccess(response.body));
         dispatch(push('/'));
       }
-    }).catch(err => dispatch(error(err.message)));
+    }).catch(err => dispatch(setError(err.message, 'login')));
   };
 }
 
@@ -47,10 +47,10 @@ export function signup(firstName, lastName, email, password, newsletter) {
       },
     }).then((response) => {
       if (response.body.error != null) {
-        dispatch(error(response.body.error));
+        dispatch(setError(response.body.error, 'signup'));
       } else {
         dispatch(push('/login'));
       }
-    }).catch(err => dispatch(error(err.message)));
+    }).catch(err => dispatch(setError({ geral: err.message }, 'signup')));
   };
 }

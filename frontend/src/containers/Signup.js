@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SignupScreen from '../components/SignupScreen';
 import { signup } from '../actions/user';
-import { error } from '../actions/app';
+import { setError, cleanError } from '../actions/error';
 
 class Signup extends Component {
   state = {
@@ -17,7 +17,7 @@ class Signup extends Component {
 
   changeStateKey = (key, value) => {
     this.setState({ [key]: value });
-    this.props.setError(null);
+    this.props.cleanError('signup');
   }
 
   changeNewsletter = () => this.setState(prevState => ({ newsletter: !prevState.newsletter }));
@@ -26,7 +26,7 @@ class Signup extends Component {
     const { password, confirmPassword, firstName, lastName, email, newsletter } = this.state;
 
     if (password !== confirmPassword) {
-      this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' });
+      this.props.setError({ confirm_password: 'Palavras-passe não correspondem.' }, 'signup');
       return;
     }
 
@@ -57,14 +57,18 @@ class Signup extends Component {
 
 Signup.propTypes = {
   error: PropTypes.shape({
-    first_name: PropTypes.array,
-    last_name: PropTypes.array,
-    email: PropTypes.array,
-    password: PropTypes.array,
+    geral: PropTypes.string,
+    first_name: PropTypes.arrayOf(PropTypes.string),
+    last_name: PropTypes.arrayOf(PropTypes.string),
+    email: PropTypes.arrayOf(PropTypes.string),
+    password: PropTypes.arrayOf(PropTypes.string),
     confirmPassword: PropTypes.string,
   }),
   setError: PropTypes.func.isRequired,
+  cleanError: PropTypes.func.isRequired,
   signup: PropTypes.func.isRequired,
 };
 
-export default connect(({ app }) => ({ error: app.error }), { signup, setError: error })(Signup);
+const propsSignup = state => ({ error: state.error.signup });
+
+export default connect(propsSignup, { signup, setError, cleanError })(Signup);

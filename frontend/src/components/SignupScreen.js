@@ -60,7 +60,7 @@ const SignupScreen = ({
       />
       Subscreva a nossa newsletter.
     </label>
-
+    {error && error.geral}
     <button onClick={submit}>Registar</button>
   </div>
 );
@@ -76,10 +76,11 @@ SignupScreen.propTypes = {
   newsletter: PropTypes.bool.isRequired,
   submit: PropTypes.func.isRequired,
   error: PropTypes.shape({
-    first_name: PropTypes.array,
-    last_name: PropTypes.array,
-    email: PropTypes.array,
-    password: PropTypes.array,
+    geral: PropTypes.string,
+    first_name: PropTypes.arrayOf(PropTypes.string),
+    last_name: PropTypes.arrayOf(PropTypes.string),
+    email: PropTypes.arrayOf(PropTypes.string),
+    password: PropTypes.arrayOf(PropTypes.string),
     confirmPassword: PropTypes.string,
   }),
 };

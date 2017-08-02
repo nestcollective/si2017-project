@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoginScreen from '../components/LoginScreen';
 import { login } from '../actions/user';
-import { error } from '../actions/app';
+import { cleanError } from '../actions/error';
 
 class Login extends Component {
   state = {
@@ -13,12 +13,12 @@ class Login extends Component {
 
   changeEmail = (event) => {
     this.setState({ email: event.target.value });
-    this.props.setError(null);
+    this.props.cleanError('login');
   };
 
   changePassword = (event) => {
     this.setState({ password: event.target.value });
-    this.props.setError(null);
+    this.props.cleanError('login');
   };
 
   login = () => this.props.login(this.state.email, this.state.password);
@@ -43,8 +43,8 @@ class Login extends Component {
 
 Login.propTypes = {
   error: PropTypes.string,
-  setError: PropTypes.func.isRequired,
+  cleanError: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
 };
 
-export default connect(({ app }) => ({ error: app.error }), { login, setError: error })(Login);
+export default connect(({ error }) => ({ error: error.login }), { login, cleanError })(Login);
