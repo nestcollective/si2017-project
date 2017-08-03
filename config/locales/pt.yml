@@ -16,6 +16,8 @@ pt:
             password:
               blank: Palavra-passe deve conter pelo menos 6 caracteres.
               too_short: Palavra-passe deve conter pelo menos 6 caracteres.
+            reset_password_token:
+              invalid: Impossível alterar palavra-passe.
     attributes:
       user:
         confirmation_sent_at: 

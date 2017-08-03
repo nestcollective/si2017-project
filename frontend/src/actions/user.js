@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { LOGIN, LOGOUT } from './types';
-import { requestPost } from '../utils/api-handler';
+import { requestPost, requestPatch } from '../utils/api-handler';
 import { setError } from './error';
 
 function loginSuccess(user) {
@@ -52,5 +52,38 @@ export function signup(firstName, lastName, email, password, newsletter) {
         dispatch(push('/login'));
       }
     }).catch(err => dispatch(setError({ geral: err.message }, 'signup')));
+  };
+}
+
+export function recoverPassword(email) {
+  return (dispatch) => {
+    requestPost('users/password.json', {
+      user: {
+        email,
+      },
+    }).then((response) => {
+      if (response.body.error != null) {
+        dispatch(setError(response.body.error, 'recoverPassword'));
+      } else {
+        dispatch(setError('Email enviado com sucesso.', 'recoverPassword'));
+      }
+    }).catch(err => dispatch(setError(err.message, 'recoverPassword')));
+  };
+}
+
+export function resetPassword(resetPasswordToken, password) {
+  return (dispatch) => {
+    requestPatch('users/password.json', {
+      user: {
+        reset_password_token: resetPasswordToken,
+        password,
+      },
+    }).then((response) => {
+      if (response.body.error != null) {
+        dispatch(setError(response.body.error, 'resetPassword'));
+      } else {
+        dispatch(push('/login'));
+      }
+    }).catch(err => dispatch(setError(err.message, 'resetPassword')));
   };
 }

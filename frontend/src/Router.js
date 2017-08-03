@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import Login from './containers/Login';
 import Signup from './containers/Signup';
 import Home from './containers/Home';
+import RecoverPassword from './containers/RecoverPassword';
+import ResetPassword from './containers/ResetPassword';
 
 const Router = ({ history, user }) => {
   const isLoggedIn = user !== null && user.email;
@@ -40,6 +42,24 @@ const Router = ({ history, user }) => {
             : <Signup />
           }
         />
+        <Route
+          initial
+          exact
+          path="/recoverpassword"
+          render={() => isLoggedIn
+            ? <Redirect to="/" />
+            : <RecoverPassword />
+          }
+        />
+        <Route
+          initial
+          exact
+          path="/recoverpassword/:token"
+          render={props => isLoggedIn
+            ? <Redirect to="/" />
+            : <ResetPassword token={props.match.params.token} />
+          }
+        />
       </div>
     </ConnectedRouter>
   );
@@ -55,6 +75,11 @@ Router.propTypes = {
     authentication_token: PropTypes.string,
   }),
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      token: PropTypes.string,
+    }),
+  }),
 };
 
 export default connect(({ user }) => ({ user: user.user }))(Router);

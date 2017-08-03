@@ -3,6 +3,7 @@ import { SET_ERROR, CLEAN_ERROR } from '../actions/types';
 const initialState = {
   login: null,
   signup: null,
+  recoverPassword: null,
 };
 
 export default function (state = initialState, action) {
